@@ -74,6 +74,7 @@ namespace SampleCodeAnalyzerProject2
                 Console.WriteLine("HELOE" + distributionGroup);
             }
             Console.WriteLine("My name is {0},{1}", firstname);
+            Console.WriteLine($"User fulle name{firstname} {lastname}");
             while (true)
             {
                 Console.WriteLine("Choose an operation:");
