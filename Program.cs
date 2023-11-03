@@ -51,6 +51,8 @@ namespace SampleCodeAnalyzerProject2
             string myString2 = myObject1 as string;
             List<string> distributionGroups = new List<string>();
             Guid.TryParse(null, out Guid refID);
+            
+            
             string convertStr = Convert.ToString(myString1);
             string directStr = myString1.ToString(); 
 
