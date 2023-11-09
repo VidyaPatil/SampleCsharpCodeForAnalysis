@@ -40,6 +40,7 @@ namespace SampleCodeAnalyzerProject2
 
         static void Main()
         {
+            string password ="pwd-";
             string firstname = null;
             string lastname = Console.ReadLine();
             var fullname = string.Format("{0} {1}", firstname);
