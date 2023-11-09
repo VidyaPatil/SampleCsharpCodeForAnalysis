@@ -42,8 +42,9 @@ namespace SampleCodeAnalyzerProject2
         {
             string password ="pwd-";
             string firstname = null;
+            int? number1 =null;
             string lastname = Console.ReadLine();
-            var fullname = string.Format("{0} {1}", firstname);
+            var fullname = string.Format("{0} {1}", firstname,number1);
             Console.WriteLine("My name is ", fullname);
             
             object myObject1 = null;
