@@ -37,7 +37,10 @@ namespace SampleCodeAnalyzerProject2
     {
         static List<Person> people = new List<Person>();
         private static int mappingRowCount;
-
+        public int Max(int a, int b)
+        {
+            return a > a ? a : b;
+        }
         static void Main()
         {
             string password ="pwd-";
