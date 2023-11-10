@@ -31,6 +31,12 @@ jobs:
           path: .\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+     
+
+      - name: Restore dependencies
+        run: dotnet restore
 
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
@@ -45,5 +51,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"VidyaPatil_SampleCsharpCodeForAnalysis" /o:"vidyapatil" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          msbuild
+          dotnet
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
