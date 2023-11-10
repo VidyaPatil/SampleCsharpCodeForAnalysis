@@ -33,7 +33,9 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
-     
+        with:
+            dotnet-version: '4.7.x'
+            include-prerelease: true
 
       - name: Restore dependencies
         run: dotnet restore
