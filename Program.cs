@@ -71,7 +71,7 @@ namespace SampleCodeAnalyzerProject2
             distributionGroups?.Remove("abc");
             foreach (var amendment in amendments)
             {
-                Console.WriteLine("HELOE" + amendment);
+                //Console.WriteLine("HELOE" + amendment);
 
             }
             foreach (var distributionGroup in distributionGroups)
