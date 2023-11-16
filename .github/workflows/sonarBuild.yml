@@ -55,3 +55,11 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"samplecheck" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           dotnet build D:\actions-runner-vidya\_work\SampleCsharpCodeForAnalysis\SampleCsharpCodeForAnalysis\SampleCodeAnalyzerProject2.sln
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      - name: Check SonarQube Analysis Status
+        run: |
+          if [ -f ".scannerwork/report-task.txt" ]; then
+            cat .scannerwork/report-task.txt
+          else
+            echo "SonarQube analysis failed."
+            exit 1
+          fi
