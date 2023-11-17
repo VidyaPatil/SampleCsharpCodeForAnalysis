@@ -69,6 +69,8 @@ namespace SampleCodeAnalyzerProject2
                 Console.WriteLine("Inside If ");
             }
             distributionGroups?.Remove("abc");
+            distributionGroups =null;
+            amendments =null;
             foreach (var amendment in amendments)
             {
                 //Console.WriteLine("HELOE" + amendment);
@@ -76,7 +78,7 @@ namespace SampleCodeAnalyzerProject2
             }
             foreach (var distributionGroup in distributionGroups)
             {
-                Console.WriteLine("HELOE" + distributionGroup);
+                Console.WriteLine("Hellow" + distributionGroup);
             }
             Console.WriteLine("My name is {0},{1}", firstname);
             Console.WriteLine($"User fulle name{firstname} {lastname}");
