@@ -1,4 +1,4 @@
-.name: Sonarqube  Build server setup
+name: Sonarqube  Build server setup
 on:
   push:
     branches: [ "main" ]
