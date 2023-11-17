@@ -1,5 +1,4 @@
-name: Sonarqube Build
-
+name: Sonarqube  Build server setup
 on:
   push:
     branches: [ "main" ]
@@ -12,7 +11,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [ubuntu-latest, sonarqube]
+    runs-on: ubuntu-latest
     permissions: read-all
 
     steps:
