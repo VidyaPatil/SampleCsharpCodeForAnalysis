@@ -52,9 +52,9 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Samplecheck-vidya" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           dotnet build D:\actions-runner-vidya\_work\SampleCsharpCodeForAnalysis\SampleCsharpCodeForAnalysis\SampleCodeAnalyzerProject2.sln
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.analysis.sarif.reportPaths=sonarqube_results.sarif
-      # Uploads results.sarif to GitHub repository using the upload-sarif action
-      - uses: github/codeql-action/upload-sarif@v2
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: $sonarqube_results.sarif
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      - name: Convert SonarQube report to SARIF
+        shell: pwsh
+        run: |
+            # Convert the SonarQube report to SARIF
+            sonar-scanner -Dsonar.login="${{ secrets.SONAR_TOKEN }}" -Dsonar.host.url="${{ secrets.SONAR_HOST_URL }}" -Dsonar.analysis.sarif.reportPaths=sonarqube_results.sarif
