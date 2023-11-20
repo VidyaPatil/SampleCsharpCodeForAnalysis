@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [selfhosted, sonarqube]
+    runs-on: [self-hosted, sonarqube]
     permissions: read-all
 
     steps:
