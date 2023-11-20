@@ -54,7 +54,7 @@ jobs:
           dotnet build D:\actions-runner-vidya\_work\SampleCsharpCodeForAnalysis\SampleCsharpCodeForAnalysis\SampleCodeAnalyzerProject2.sln
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
       - name: Convert SonarQube report to SARIF
-        shell: pwsh
+        shell: powershell
         run: |
             # Convert the SonarQube report to SARIF
             sonar-scanner -Dsonar.login="${{ secrets.SONAR_TOKEN }}" -Dsonar.host.url="${{ secrets.SONAR_HOST_URL }}" -Dsonar.analysis.sarif.reportPaths=sonarqube_results.sarif
