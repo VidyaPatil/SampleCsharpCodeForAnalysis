@@ -52,7 +52,7 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Samplecheck-vidya" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           dotnet build D:\actions-runner-vidya\_work\SampleCsharpCodeForAnalysis\SampleCsharpCodeForAnalysis\SampleCodeAnalyzerProject2.sln
-          $sonarqube_results = .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}" -o results.sarif
+          $sonarqube_results = .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
        # Uploads results.sarif to GitHub repository using the upload-sarif action
       - name: Append SonarQube results to code scanning alerts
         run: |
