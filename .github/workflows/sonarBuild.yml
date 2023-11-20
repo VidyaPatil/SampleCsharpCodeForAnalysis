@@ -1,4 +1,4 @@
-name: Build
+name: Sonar server Build yml & Upload Results
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [windows-latest, sonarqube]
+    runs-on: [self-hosted, sonarqube]
     permissions: read-all
 
     steps:
@@ -48,12 +48,18 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Samplecheck-vidya" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           dotnet build D:\actions-runner-vidya\_work\SampleCsharpCodeForAnalysis\SampleCsharpCodeForAnalysis\SampleCodeAnalyzerProject2.sln
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-      - name: Check if file exists
-        run: bash -c 'if [ -f ".scannerwork/report-task.txt" ]; then echo "File exists"; else echo "File does not exist"; fi'
+      - name: Build and analyze
+        shell: powershell
+        run: |
+          .\.sonar\scanner\sonar-scanner.bat -Dsonar.projectKey=Samplecheck-vidya -Dsonar.login="${{ secrets.SONAR_TOKEN }}" -Dsonar.host.url="${{ secrets.SONAR_HOST_URL }}" -Dsonar.analysis.sarif.reportPaths=sonarqube_results.sarif
+
+      # Uploads results.sarif to GitHub repository using the upload-sarif action
+      - uses: github/codeql-action/upload-sarif@v2
+        with:
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: $sonarqube_results.sarif
