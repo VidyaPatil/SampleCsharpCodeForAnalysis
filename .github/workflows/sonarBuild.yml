@@ -1,4 +1,4 @@
-name: Build
+name: Sonar server Build yml
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [windows-latest, sonarqube]
+    runs-on: [selfhosted, sonarqube]
     permissions: read-all
 
     steps:
@@ -52,6 +52,15 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Samplecheck-vidya" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           dotnet build D:\actions-runner-vidya\_work\SampleCsharpCodeForAnalysis\SampleCsharpCodeForAnalysis\SampleCodeAnalyzerProject2.sln
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-      - name: Check if file exists
-        run: bash -c 'if [ -f ".scannerwork/report-task.txt" ]; then echo "File exists"; else echo "File does not exist"; fi'
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.analysis.mode=preview /d:sonar.report.export.path=sonarqube_results.json
+   
+      - name: Append SonarQube results to code scanning alerts
+        run: |
+          # Read the SonarQube results from the file
+          sonarqube_results=$(cat sonarqube_results.json)
+          # Create or update code scanning alerts using GitHub API
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/code-scanning/alerts \
+            -d '{"title": "SonarQube Vulnerabilities", "body": "'"${sonarqube_results}"'"}'
