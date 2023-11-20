@@ -53,21 +53,14 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Samplecheck-vidya" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           dotnet build D:\actions-runner-vidya\_work\SampleCsharpCodeForAnalysis\SampleCsharpCodeForAnalysis\SampleCodeAnalyzerProject2.sln
           $sonarqube_results = .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-       # Uploads results.sarif to GitHub repository using the upload-sarif action
       - name: Append SonarQube results to code scanning alerts
         run: |
-         # Read the SonarQube results from the SARIF file
-         $sonarqube_results_content = Get-Content -Raw -Path results.sarif
-         
-         # Create or update code scanning alerts using GitHub API
-         $github_token = "${{ secrets.GITHUB_TOKEN }}"
-         $repo_owner = $env:GITHUB_REPOSITORY -split '/' | select -First 1
-         $repo_name = $env:GITHUB_REPOSITORY -split '/' | select -Last 1
-         $github_api_url = "https://api.github.com/repos/$repo_owner/$repo_name/code-scanning/alerts"
-         
-         $alert_payload = @{
-           title = "SonarQube Vulnerabilities"
-           body = $sonarqube_results_content
-         } | ConvertTo-Json
-         
-         Invoke-RestMethod -Uri $github_api_url -Method Post -Headers @{Authorization = "Bearer $github_token"; Accept = "application/vnd.github.v3+json"} -Body $alert_payload
+          # Read the SonarQube results from the file
+          #sonarqube_results=$(cat sonarqube_results)
+          
+          # Create or update code scanning alerts using GitHub API
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/code-scanning/alerts \
+            -d '{"title": "SonarQube Vulnerabilities", "body": "'"${sonarqube_results}"'"}'
