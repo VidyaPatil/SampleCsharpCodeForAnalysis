@@ -39,7 +39,7 @@ namespace SampleCodeAnalyzerProject2
         {
             return a > a ? a : b;
         }
-        public int Max(int a, int b)
+        public int Max2(int a, int b)
         {
             return a > a ? a : b;
         }
