@@ -34,8 +34,11 @@ namespace SampleCodeAnalyzerProject2
     public class Program
     {
         static List<Person> people = new List<Person>();
-        private static int mappingRowCount;
-        
+        private static int mappingRowCount;\
+        int FunctionAB(int a, int b)
+        {
+            return a > a ? a : b;
+        }
         static void Main()
         {
             string password ="pwd-";
