@@ -39,11 +39,6 @@ namespace SampleCodeAnalyzerProject2
         {
             return a > a ? a : b;
         }
-        void PrintText(object o)
-        {
-            Console.WriteLine(o.ToString());
-        }
-
         static void Main()
         {
             string password ="pwd-";
@@ -52,7 +47,6 @@ namespace SampleCodeAnalyzerProject2
             string lastname = Console.ReadLine();
             var fullname = string.Format("{0} {1}", firstname,number1);
             Console.WriteLine("My name is ", fullname);
-            string password = "pwd%34325";
             
             object myObject1 = null;
             string myString1 = (string)myObject1; // my string1 will be null
@@ -61,32 +55,23 @@ namespace SampleCodeAnalyzerProject2
             List<string> distributionGroups = new List<string>();
             Guid.TryParse(null, out Guid refID);
             
-             if (myString1 != null || myString1.Length > 0)
-             {
-                Console.WriteLine(myString1);
-             }
-             PrintText("Hello");
-             PrintText(null);
+            
             string convertStr = Convert.ToString(myString1);
             string directStr = myString1.ToString(); 
 
             var amendments = Newtonsoft.Json.JsonConvert.DeserializeObject<List<dynamic>>("");
-            distributionGroups.Add(password);
             distributionGroups.Add("ab");
             distributionGroups.Add("abc");
             distributionGroups.Add("abcz");
-            if (distributionGroups ==null || distributionGroups.Where(x => x == "n").Any())
+            if (distributionGroups.Where(x => x == "n").Any())
             {
 
                 Console.WriteLine("Inside If ");
             }
             distributionGroups?.Remove("abc");
-            string[] strings = { "hello", "world" };
-            string[] moreStrings = { "hello", "world" };
-             Console.WriteLine(strings.Equals(moreStrings));
             foreach (var amendment in amendments)
             {
-                //Console.WriteLine("HELOE" + amendment);
+                Console.WriteLine("HELOE" + amendment);
 
             }
             foreach (var distributionGroup in distributionGroups)
