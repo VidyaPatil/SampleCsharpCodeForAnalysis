@@ -66,7 +66,7 @@ namespace SampleCodeAnalyzerProject2
             }
             Program program = new Program();
             program.PrintText("Hello");
-
+            program.PrintText(null);
             string convertStr = Convert.ToString(myString1);
             string directStr = myString1.ToString();
 
