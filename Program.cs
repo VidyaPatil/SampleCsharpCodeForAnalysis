@@ -86,7 +86,7 @@ namespace SampleCodeAnalyzerProject2
             Console.WriteLine(strings.Equals(moreStrings));
             foreach (var amendment in amendments)
             {
-                 Console.WriteLine("HELOE" + amendment);
+                 Console.WriteLine("HELOE");
             }
             foreach (var distributionGroup in distributionGroups)
             {
