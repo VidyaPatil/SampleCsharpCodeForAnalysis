@@ -73,11 +73,10 @@ namespace SampleCodeAnalyzerProject2
             foreach (var amendment in amendments)
             {
                 Console.WriteLine("HELOETODO");
-
             }
             foreach (var distributionGroup in distributionGroups)
             {
-                Console.WriteLine("HELOE" + distributionGroup);
+                Console.WriteLine("HELOE");
             }
             Console.WriteLine("My name is {0},{1}", firstname);
             Console.WriteLine($"User fulle name{firstname} {lastname}");
