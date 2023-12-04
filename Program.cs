@@ -35,7 +35,7 @@ namespace SampleCodeAnalyzerProject2
     {
         static List<Person> people = new List<Person>();
         private static int mappingRowCount;
-        public int Max(int a, int b)
+        int FunctionAB(int a, int b)
         {
             return a > a ? a : b;
         }
@@ -54,11 +54,12 @@ namespace SampleCodeAnalyzerProject2
             string myString2 = myObject1 as string;
             List<string> distributionGroups = new List<string>();
             Guid.TryParse(null, out Guid refID);
-            
+            //TODO
+            //FIXMEVIDYA
             
             string convertStr = Convert.ToString(myString1);
             string directStr = myString1.ToString(); 
-
+//TODO
             var amendments = Newtonsoft.Json.JsonConvert.DeserializeObject<List<dynamic>>("");
             distributionGroups.Add("ab");
             distributionGroups.Add("abc");
@@ -71,12 +72,11 @@ namespace SampleCodeAnalyzerProject2
             distributionGroups?.Remove("abc");
             foreach (var amendment in amendments)
             {
-                Console.WriteLine("HELOE" + amendment);
-
+                Console.WriteLine("HELOETODO");
             }
             foreach (var distributionGroup in distributionGroups)
             {
-                Console.WriteLine("HELOE" + distributionGroup);
+                Console.WriteLine("HELOE");
             }
             Console.WriteLine("My name is {0},{1}", firstname);
             Console.WriteLine($"User fulle name{firstname} {lastname}");
